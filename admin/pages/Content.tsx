@@ -1,11 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
 import { SERVICES, MASTERS } from '../../constants';
 
 export const Content: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'services' | 'masters' | 'offers'>('services');
+
   return (
     <div className="space-y-8">
+      {/* Tabs */}
+      <div className="bg-white p-1 rounded-lg border border-stone-100 shadow-sm inline-flex gap-1">
+        <button
+          onClick={() => setActiveTab('services')}
+          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+            activeTab === 'services'
+              ? 'bg-stone-900 text-white'
+              : 'text-stone-600 hover:text-stone-900'
+          }`}
+        >
+          Услуги
+        </button>
+        <button
+          onClick={() => setActiveTab('masters')}
+          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+            activeTab === 'masters'
+              ? 'bg-stone-900 text-white'
+              : 'text-stone-600 hover:text-stone-900'
+          }`}
+        >
+          Мастера
+        </button>
+        <button
+          onClick={() => setActiveTab('offers')}
+          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+            activeTab === 'offers'
+              ? 'bg-stone-900 text-white'
+              : 'text-stone-600 hover:text-stone-900'
+          }`}
+        >
+          Предложения
+        </button>
+      </div>
+
       {/* Services Section */}
+      {activeTab === 'services' && (
       <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
         <div className="flex justify-between items-center mb-6">
              <div>
@@ -48,8 +85,10 @@ export const Content: React.FC = () => {
             </table>
         </div>
       </div>
+      )}
 
        {/* Masters Section */}
+       {activeTab === 'masters' && (
        <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
         <div className="flex justify-between items-center mb-6">
              <div>
@@ -91,6 +130,25 @@ export const Content: React.FC = () => {
             </table>
         </div>
       </div>
+      )}
+
+      {/* Offers Section */}
+      {activeTab === 'offers' && (
+      <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
+        <div className="flex justify-between items-center mb-6">
+             <div>
+                <h2 className="text-2xl font-serif font-bold">Предложения</h2>
+                <p className="text-stone-400 text-sm mt-1">Список всех специальных предложений</p>
+             </div>
+             <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-colors">
+                <Plus size={18} /> Добавить предложение
+             </button>
+        </div>
+        <div className="text-center py-12 text-stone-400">
+          <p>Предложения пока отсутствуют</p>
+        </div>
+      </div>
+      )}
     </div>
   );
 };

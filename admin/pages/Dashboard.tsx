@@ -1,9 +1,8 @@
 import React from 'react';
 import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  BarChart, Bar, Cell 
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
-import { Users, Calendar, DollarSign, Activity } from 'lucide-react';
+import { Users, Calendar, CheckCircle, Clock } from 'lucide-react';
 
 // Mock Data
 const revenueData = [
@@ -17,17 +16,14 @@ const revenueData = [
 ];
 
 const masterLoadData = [
-  { name: 'Анна', value: 85 },
-  { name: 'Айгуль', value: 65 },
-  { name: 'Жанна', value: 92 },
-  { name: 'Светлана', value: 40 },
+  { name: 'Светлана', value: 1 },
 ];
 
 const stats = [
-  { label: 'Всего записей', value: '1,284', icon: <Calendar className="text-stone-500" />, sub: 'Все записи в системе' },
-  { label: 'Подтверждено', value: '892', icon: <Activity className="text-green-500" />, sub: 'Подтвержденные записи' },
-  { label: 'Клиенты', value: '452', icon: <Users className="text-blue-500" />, sub: 'Зарегистрированные клиенты' },
-  { label: 'Выручка', value: '1.2M с', icon: <DollarSign className="text-yellow-600" />, sub: 'Общий доход' },
+  { label: 'Всего записей', value: '1', icon: <Calendar className="text-stone-500" size={24} />, sub: 'Все записи в системе' },
+  { label: 'Подтверждено', value: '1', icon: <CheckCircle className="text-green-500" size={24} />, sub: 'Подтвержденные записи' },
+  { label: 'Ожидает', value: '0', icon: <Clock className="text-yellow-500" size={24} />, sub: 'Неподтвержденные записи' },
+  { label: 'Клиенты', value: '1', icon: <Users className="text-blue-500" size={24} />, sub: 'Зарегистрированные клиенты' },
 ];
 
 export const Dashboard: React.FC = () => {
@@ -40,7 +36,7 @@ export const Dashboard: React.FC = () => {
             <div className="flex justify-between items-start mb-4">
               <div>
                 <h3 className="text-sm font-medium text-stone-500 mb-1">{stat.label}</h3>
-                <div className="text-3xl font-serif font-bold text-stone-900">{stat.value}</div>
+                <div className="text-4xl font-serif font-bold text-stone-900">{stat.value}</div>
               </div>
               <div className="p-2 bg-stone-50 rounded-lg">
                 {stat.icon}
@@ -54,9 +50,9 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Revenue Chart */}
         <div className="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-          <div className="flex items-center gap-2 mb-6">
-            <DollarSign size={20} />
+          <div className="mb-2">
             <h3 className="text-xl font-serif font-bold">Финансовая статистика</h3>
+            <p className="text-stone-400 text-sm mt-1">Доходы, расходы и баланс за текущий месяц</p>
           </div>
           <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -86,15 +82,15 @@ export const Dashboard: React.FC = () => {
           </div>
           <div className="flex justify-between mt-4 px-4">
              <div className="text-center p-4 bg-green-50 rounded-lg w-1/3 mx-2">
-                <div className="text-green-800 text-lg font-bold">121,268 c</div>
+                <div className="text-green-800 text-lg font-bold">12126883 сом</div>
                 <div className="text-green-600 text-xs uppercase">Доходы</div>
              </div>
              <div className="text-center p-4 bg-red-50 rounded-lg w-1/3 mx-2">
-                <div className="text-red-800 text-lg font-bold">0 c</div>
+                <div className="text-red-800 text-lg font-bold">0 сом</div>
                 <div className="text-red-600 text-xs uppercase">Расходы</div>
              </div>
              <div className="text-center p-4 bg-blue-50 rounded-lg w-1/3 mx-2">
-                <div className="text-blue-800 text-lg font-bold">121,268 c</div>
+                <div className="text-blue-800 text-lg font-bold">12126883 сом</div>
                 <div className="text-blue-600 text-xs uppercase">Баланс</div>
              </div>
           </div>
@@ -103,45 +99,40 @@ export const Dashboard: React.FC = () => {
         {/* General Stats / Sidebar Widgets */}
         <div className="space-y-6">
             <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-                <div className="flex items-center gap-2 mb-6">
-                    <Activity size={20} />
+                <div className="mb-2">
                     <h3 className="text-xl font-serif font-bold">Общая статистика</h3>
+                    <p className="text-stone-400 text-sm mt-1">Ключевые показатели системы</p>
                 </div>
                 <div className="space-y-4">
                     <div className="flex justify-between items-center p-3 bg-stone-50 rounded-lg">
                         <span className="text-stone-600">Услуги</span>
-                        <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">12</span>
+                        <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">1</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-stone-50 rounded-lg">
                         <span className="text-stone-600">Мастера</span>
-                        <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">5</span>
+                        <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">1</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-stone-50 rounded-lg">
                         <span className="text-stone-600">Товары</span>
-                        <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">48</span>
+                        <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">1</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
                         <span className="text-red-800">Низкий запас</span>
-                        <span className="bg-red-200 text-red-800 px-2 py-1 rounded text-xs font-bold">0</span>
+                        <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold w-6 h-6 flex items-center justify-center">0</span>
                     </div>
                 </div>
             </div>
 
             <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-                 <h3 className="text-xl font-serif font-bold mb-4">Нагрузка по мастерам</h3>
-                 <div className="h-[200px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <BarChart layout="vertical" data={masterLoadData}>
-                            <XAxis type="number" hide />
-                            <YAxis dataKey="name" type="category" width={80} tick={{fontSize: 12}} />
-                            <Tooltip cursor={{fill: 'transparent'}} />
-                            <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                                {masterLoadData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#1c1917' : '#a8a29e'} />
-                                ))}
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
+                 <h3 className="text-xl font-serif font-bold mb-2">Нагрузка по мастерам</h3>
+                 <p className="text-stone-400 text-sm mb-4">Загруженность мастеров</p>
+                 <div className="space-y-3">
+                    {masterLoadData.map((master, index) => (
+                        <div key={index} className="flex justify-between items-center p-3 bg-stone-50 rounded-lg">
+                            <span className="text-stone-600 font-medium">{master.name}</span>
+                            <span className="text-stone-800 font-bold">{master.value} записей</span>
+                        </div>
+                    ))}
                  </div>
             </div>
         </div>
@@ -150,12 +141,13 @@ export const Dashboard: React.FC = () => {
       {/* Client Stats & Today's Bookings */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
          <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-            <h3 className="text-xl font-serif font-bold mb-6">Статистика клиентов</h3>
+            <h3 className="text-xl font-serif font-bold mb-2">Статистика клиентов</h3>
+            <p className="text-stone-400 text-sm mb-6">Распределение клиентов по статусам</p>
             <div className="space-y-4">
                 {['Новые клиенты', 'Постоянные клиенты', 'Капризные клиенты', 'Заблокированные'].map((label, i) => (
                     <div key={i} className="flex justify-between items-center">
                         <span className="text-stone-600">{label}</span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold text-white ${i === 2 || i === 3 ? 'bg-rose-500' : 'bg-stone-400'}`}>
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold text-white w-6 h-6 flex items-center justify-center ${i === 2 ? 'bg-rose-500' : 'bg-rose-500'}`}>
                             {i === 2 ? 1 : 0}
                         </span>
                     </div>
@@ -164,15 +156,20 @@ export const Dashboard: React.FC = () => {
          </div>
 
          <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-            <h3 className="text-xl font-serif font-bold mb-6">Записи на сегодня</h3>
+            <h3 className="text-xl font-serif font-bold mb-2">Записи на сегодня</h3>
+            <p className="text-stone-400 text-sm mb-6">Текущие и предстоящие записи</p>
             <div className="space-y-4">
                 <div className="flex justify-between items-center">
                      <span className="text-stone-600">Сегодня</span>
-                     <span className="bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-bold">0</span>
+                     <span className="bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-bold w-6 h-6 flex items-center justify-center">0</span>
                 </div>
                 <div className="flex justify-between items-center">
                      <span className="text-stone-600">Предстоящие</span>
-                     <span className="bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-bold">0</span>
+                     <span className="bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-bold w-6 h-6 flex items-center justify-center">0</span>
+                </div>
+                <div className="flex justify-between items-center pt-2 border-t border-stone-100">
+                     <span className="text-stone-600">Популярные услуги</span>
+                     <span className="text-stone-800 font-bold">1</span>
                 </div>
             </div>
          </div>
