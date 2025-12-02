@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ServiceItem, Master } from '../types';
+import { SERVICES, MASTERS } from '../constants';
 
 export interface Product {
   id: string;
@@ -34,31 +35,28 @@ const STORAGE_KEYS = {
 };
 
 const getInitialServices = (): ServiceItem[] => {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === 'undefined') return SERVICES;
   const stored = localStorage.getItem(STORAGE_KEYS.services);
   if (stored) {
     try {
       return JSON.parse(stored);
     } catch {
-      return [];
+      return SERVICES;
     }
   }
-  // Импортируем начальные данные из constants
-  const { SERVICES } = require('../constants');
   return SERVICES;
 };
 
 const getInitialMasters = (): Master[] => {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === 'undefined') return MASTERS;
   const stored = localStorage.getItem(STORAGE_KEYS.masters);
   if (stored) {
     try {
       return JSON.parse(stored);
     } catch {
-      return [];
+      return MASTERS;
     }
   }
-  const { MASTERS } = require('../constants');
   return MASTERS;
 };
 
