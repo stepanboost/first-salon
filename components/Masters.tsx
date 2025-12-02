@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MASTERS } from '../constants';
+import { useData } from '../contexts/DataContext';
 import { Button } from './Button';
 
 export const Masters: React.FC<{ onBook: (service: string, master: string) => void }> = ({ onBook }) => {
+  const { masters } = useData();
+  
   return (
     <section id="masters" className="py-24 bg-stone-900 text-stone-50">
       <div className="container mx-auto px-4 md:px-8">
@@ -13,7 +15,7 @@ export const Masters: React.FC<{ onBook: (service: string, master: string) => vo
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {MASTERS.map((master, index) => (
+          {masters.map((master, index) => (
             <motion.div
               key={master.id}
               initial={{ opacity: 0, scale: 0.95 }}

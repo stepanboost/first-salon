@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SERVICES } from '../constants';
+import { useData } from '../contexts/DataContext';
 import { Button } from './Button';
 
 export const Services: React.FC<{ onBook: (service: string) => void }> = ({ onBook }) => {
+  const { services } = useData();
+  
   return (
     <section id="services" className="py-24 bg-white">
       <div className="container mx-auto px-4 md:px-8">
@@ -13,7 +15,7 @@ export const Services: React.FC<{ onBook: (service: string) => void }> = ({ onBo
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERVICES.map((service, index) => (
+          {services.map((service, index) => (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, y: 20 }}

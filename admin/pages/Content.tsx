@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
-import { SERVICES, MASTERS } from '../../constants';
+import { useData } from '../../contexts/DataContext';
+import { ModalAddService } from '../components/ModalAddService';
+import { ModalAddMaster } from '../components/ModalAddMaster';
 
 export const Content: React.FC = () => {
+  const { services, masters, deleteService, deleteMaster } = useData();
   const [activeTab, setActiveTab] = useState<'services' | 'masters' | 'offers'>('services');
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [isMasterModalOpen, setIsMasterModalOpen] = useState(false);
 
   return (
     <div className="space-y-8">
@@ -49,7 +54,10 @@ export const Content: React.FC = () => {
                 <h2 className="text-2xl font-serif font-bold">Услуги</h2>
                 <p className="text-stone-400 text-sm mt-1">Список всех предоставляемых услуг</p>
              </div>
-             <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-colors">
+             <button 
+               onClick={() => setIsServiceModalOpen(true)}
+               className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-colors"
+             >
                 <Plus size={18} /> Добавить услугу
              </button>
         </div>
@@ -64,7 +72,7 @@ export const Content: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody className="text-sm">
-                    {SERVICES.map((service, index) => (
+                    {services.map((service, index) => (
                         <tr key={service.id} className="border-b border-stone-50 hover:bg-stone-50 transition-colors">
                             <td className="py-4 text-stone-400">{index + 1}</td>
                             <td className="py-4 font-medium flex items-center gap-4">
@@ -76,7 +84,12 @@ export const Content: React.FC = () => {
                             <td className="py-4 text-right">
                                 <div className="flex justify-end gap-3">
                                     <button className="text-stone-400 hover:text-stone-900"><Edit2 size={18} /></button>
-                                    <button className="text-stone-400 hover:text-red-500"><Trash2 size={18} /></button>
+                                    <button 
+                                      onClick={() => deleteService(service.id)}
+                                      className="text-stone-400 hover:text-red-500"
+                                    >
+                                      <Trash2 size={18} />
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -95,7 +108,10 @@ export const Content: React.FC = () => {
                 <h2 className="text-2xl font-serif font-bold">Мастера</h2>
                 <p className="text-stone-400 text-sm mt-1">Список мастеров и их прайс</p>
              </div>
-             <button className="bg-stone-900 hover:bg-stone-800 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-colors">
+             <button 
+               onClick={() => setIsMasterModalOpen(true)}
+               className="bg-stone-900 hover:bg-stone-800 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-colors"
+             >
                 <Plus size={18} /> Добавить мастера
              </button>
         </div>
@@ -112,7 +128,7 @@ export const Content: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody className="text-sm">
-                    {MASTERS.map((master, index) => (
+                    {masters.map((master, index) => (
                         <tr key={master.id} className="border-b border-stone-50 hover:bg-stone-50 transition-colors">
                             <td className="py-4 text-stone-400">{index + 1}</td>
                             <td className="py-4 font-medium">{master.name}</td>
@@ -121,7 +137,12 @@ export const Content: React.FC = () => {
                             <td className="py-4 text-right">
                                 <div className="flex justify-end gap-3">
                                     <button className="text-stone-400 hover:text-stone-900"><Edit2 size={18} /></button>
-                                    <button className="text-stone-400 hover:text-red-500"><Trash2 size={18} /></button>
+                                    <button 
+                                      onClick={() => deleteMaster(master.id)}
+                                      className="text-stone-400 hover:text-red-500"
+                                    >
+                                      <Trash2 size={18} />
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -149,6 +170,15 @@ export const Content: React.FC = () => {
         </div>
       </div>
       )}
+
+      <ModalAddService 
+        isOpen={isServiceModalOpen} 
+        onClose={() => setIsServiceModalOpen(false)} 
+      />
+      <ModalAddMaster 
+        isOpen={isMasterModalOpen} 
+        onClose={() => setIsMasterModalOpen(false)} 
+      />
     </div>
   );
 };

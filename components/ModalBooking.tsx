@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { Button } from './Button';
-import { SERVICES, MASTERS } from '../constants';
+import { useData } from '../contexts/DataContext';
 import { ModalState, BookingFormData } from '../types';
 
 interface ModalBookingProps {
@@ -12,10 +12,11 @@ interface ModalBookingProps {
 }
 
 export const ModalBooking: React.FC<ModalBookingProps> = ({ isOpen, onClose, initialState }) => {
+  const { services, masters } = useData();
   const [formData, setFormData] = useState<BookingFormData>({
     name: '',
     phone: '',
-    service: initialState.preselectedService || SERVICES[0].name,
+    service: initialState.preselectedService || (services[0]?.name || ''),
     master: initialState.preselectedMaster || '',
     time: '',
   });
@@ -105,7 +106,7 @@ export const ModalBooking: React.FC<ModalBookingProps> = ({ isOpen, onClose, ini
                         onChange={(e) => setFormData({...formData, service: e.target.value})}
                         className="w-full border-b border-stone-300 py-2 pr-8 focus:outline-none focus:border-stone-900 transition-colors bg-transparent appearance-none"
                       >
-                        {SERVICES.map(s => (
+                        {services.map(s => (
                           <option key={s.id} value={s.name}>{s.name}</option>
                         ))}
                       </select>
@@ -120,7 +121,7 @@ export const ModalBooking: React.FC<ModalBookingProps> = ({ isOpen, onClose, ini
                       className="w-full border-b border-stone-300 py-2 pr-8 focus:outline-none focus:border-stone-900 transition-colors bg-transparent appearance-none"
                     >
                       <option value="">Любой мастер</option>
-                      {MASTERS.map(m => (
+                      {masters.map(m => (
                         <option key={m.id} value={m.name}>{m.name}</option>
                       ))}
                     </select>

@@ -3,7 +3,7 @@ import { Search, Edit2, ChevronDown } from 'lucide-react';
 
 export const Users: React.FC = () => {
   return (
-    <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm min-h-[500px]">
+    <div className="bg-white p-4 lg:p-6 rounded-xl border border-stone-100 shadow-sm min-h-[500px]">
        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
             <div>
                 <h2 className="text-2xl font-serif font-bold">Клиенты</h2>
@@ -24,7 +24,30 @@ export const Users: React.FC = () => {
             </div>
        </div>
 
-       <div className="overflow-x-auto">
+       {/* Mobile Card View */}
+       <div className="block md:hidden space-y-4">
+         <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
+           <div className="flex justify-between items-start mb-3">
+             <div>
+               <h3 className="font-medium text-stone-900">Stepan</h3>
+               <p className="text-sm text-stone-600 mt-1">+996637742371</p>
+             </div>
+             <span className="bg-rose-500 text-white text-xs px-2 py-1 rounded-md">Капризный</span>
+           </div>
+           <div className="text-xs text-stone-500 mb-3">Дата регистрации: 29.11.2025</div>
+           <div className="flex gap-2 items-center">
+             <button className="p-1 hover:text-stone-900 text-stone-400"><Edit2 size={16} /></button>
+             <div className="flex border border-stone-200 rounded overflow-hidden flex-1">
+               <button className="flex-1 px-2 py-1 text-xs hover:bg-stone-100 border-r border-stone-200">Новый</button>
+               <button className="flex-1 px-2 py-1 text-xs hover:bg-stone-100 border-r border-stone-200">Постоянный</button>
+               <button className="flex-1 px-2 py-1 text-xs hover:bg-stone-100 text-stone-400">Капризный</button>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       {/* Desktop Table View */}
+       <div className="hidden md:block overflow-x-auto">
          <table className="w-full">
             <thead>
                 <tr className="text-left text-xs uppercase tracking-wider text-stone-400 border-b border-stone-100">

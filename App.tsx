@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { DataProvider } from './contexts/DataContext';
 import { LandingPage } from './pages/LandingPage';
 import { AdminLayout } from './admin/AdminLayout';
 import { Login } from './admin/pages/Login';
@@ -22,34 +23,36 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public Route */}
-        <Route path="/" element={<LandingPage />} />
+    <DataProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public Route */}
+          <Route path="/" element={<LandingPage />} />
 
-        {/* Admin Login */}
-        <Route path="/admin/login" element={<Login />} />
+          {/* Admin Login */}
+          <Route path="/admin/login" element={<Login />} />
 
-        {/* Admin Panel Protected Routes */}
-        <Route path="/admin" element={
-          <ProtectedRoute>
-            <AdminLayout />
-          </ProtectedRoute>
-        }>
-          <Route index element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
-          <Route path="content" element={<Content />} />
-          <Route path="products" element={<Products />} />
-          <Route path="bookings" element={<Bookings />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="cash" element={<CashRegister />} />
-        </Route>
+          {/* Admin Panel Protected Routes */}
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="content" element={<Content />} />
+            <Route path="products" element={<Products />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="cash" element={<CashRegister />} />
+          </Route>
 
-        {/* Catch all redirect */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Catch all redirect */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </DataProvider>
   );
 };
 

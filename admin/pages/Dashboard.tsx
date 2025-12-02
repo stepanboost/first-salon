@@ -30,7 +30,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Top Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         {stats.map((stat, index) => (
           <div key={index} className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start mb-4">
@@ -47,7 +47,7 @@ export const Dashboard: React.FC = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
         {/* Main Revenue Chart */}
         <div className="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
           <div className="mb-2">
@@ -80,17 +80,17 @@ export const Dashboard: React.FC = () => {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex justify-between mt-4 px-4">
-             <div className="text-center p-4 bg-green-50 rounded-lg w-1/3 mx-2">
-                <div className="text-green-800 text-lg font-bold">12126883 сом</div>
+          <div className="flex flex-col sm:flex-row justify-between mt-4 gap-2 sm:gap-0 sm:px-4">
+             <div className="text-center p-3 sm:p-4 bg-green-50 rounded-lg flex-1 sm:w-1/3 sm:mx-2">
+                <div className="text-green-800 text-base sm:text-lg font-bold break-words">12126883 сом</div>
                 <div className="text-green-600 text-xs uppercase">Доходы</div>
              </div>
-             <div className="text-center p-4 bg-red-50 rounded-lg w-1/3 mx-2">
-                <div className="text-red-800 text-lg font-bold">0 сом</div>
+             <div className="text-center p-3 sm:p-4 bg-red-50 rounded-lg flex-1 sm:w-1/3 sm:mx-2">
+                <div className="text-red-800 text-base sm:text-lg font-bold">0 сом</div>
                 <div className="text-red-600 text-xs uppercase">Расходы</div>
              </div>
-             <div className="text-center p-4 bg-blue-50 rounded-lg w-1/3 mx-2">
-                <div className="text-blue-800 text-lg font-bold">12126883 сом</div>
+             <div className="text-center p-3 sm:p-4 bg-blue-50 rounded-lg flex-1 sm:w-1/3 sm:mx-2">
+                <div className="text-blue-800 text-base sm:text-lg font-bold break-words">12126883 сом</div>
                 <div className="text-blue-600 text-xs uppercase">Баланс</div>
              </div>
           </div>
@@ -116,10 +116,6 @@ export const Dashboard: React.FC = () => {
                         <span className="text-stone-600">Товары</span>
                         <span className="bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-bold">1</span>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
-                        <span className="text-red-800">Низкий запас</span>
-                        <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold w-6 h-6 flex items-center justify-center">0</span>
-                    </div>
                 </div>
             </div>
 
@@ -139,7 +135,7 @@ export const Dashboard: React.FC = () => {
       </div>
       
       {/* Client Stats & Today's Bookings */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
          <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
             <h3 className="text-xl font-serif font-bold mb-2">Статистика клиентов</h3>
             <p className="text-stone-400 text-sm mb-6">Распределение клиентов по статусам</p>
